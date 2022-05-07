@@ -3,6 +3,8 @@
 #include <limits.h>
 #include <float.h>
 
+#define EXECUTABLE  "limit"
+
 
 int main(int argc, char** argv) {
 

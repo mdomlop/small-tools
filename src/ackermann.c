@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define EXECUTABLE  "ackermann"
 
 int A(int m, int n)
 {

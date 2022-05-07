@@ -17,16 +17,6 @@ Nota: Si la masa se da en gramos, la fórmula produce la energía en ergios.
 
 #include <stdio.h>
 
-#define EXECUTABLE  "einstein-e"
-
-#define J 10000000  /* Un julio son 10 millones de ergios */
-#define TJ 1000000000000  /* (1 TJ = 10^12 J */
-#define kT 4.184  /* Terajulios */
-#define mT 1000  /* Kilotones */
-#define HIROSHIMA 16  /* Kilotones */
-#define TSAR 50 /* Megatones */
-
-
 int main (void)
 {
     long double e, m;
@@ -39,10 +29,6 @@ int main (void)
     e = m * c2;
 
     printf("La energía producida es %.0Lf ergios.\n", e);
-    printf("Lo cual equivale a unas %.0Lf bombas como la de Hiroshima.\n",
-            e / J / TJ / kT / HIROSHIMA);
-    printf("Y a unas %.0Lf bombas tipo Zar.\n",
-            e / J / TJ / kT / mT / TSAR);
 
 
     return 0;

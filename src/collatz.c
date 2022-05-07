@@ -12,6 +12,7 @@ Good luck!
 #include<stdio.h>
 #include<stdlib.h>
 
+#define EXECUTABLE  "collatz"
 
 int founded(int a, int b[], int c)
 {

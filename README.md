@@ -1,4 +1,4 @@
-maths
-====
+small-tools
+===========
 
-Some programming exercises related to mathematics.
+Some small programming exercises that have resulted in some useful tools.
