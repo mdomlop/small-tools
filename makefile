@@ -24,12 +24,12 @@ SRC  =  $(addsuffix .c,$(addprefix src/,$(NAMES)))
 all: elf exe
 
 %.elf: %.c
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+	$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS)
 elf: $(ELFS)
 
 exe: CC = x86_64-w64-mingw32-gcc
 %.exe: %.c
-	$(CC) $(CFLAGS) -Wno-format-zero-length $^ -o $@ $(LDFLAGS)
+	$(CC) $^ -o $@ $(CFLAGS) -Wno-format-zero-length $(LDFLAGS)
 exe: $(EXES)
 
 elf_opti: CFLAGS = -std=c11 -march=native -mtune=native -Wall -pedantic -static -O2
@@ -75,7 +75,6 @@ $(ARCHPKG): PKGBUILD makefile $(SRC) LICENSE README.md
 	sed -i "s|url=.*|url='$(URL)'|" PKGBUILD
 	sed -i "s|license=.*|license=('$(LICENSE)')|" PKGBUILD
 	makepkg -df PKGDEST=./ BUILDDIR=./ PKGEXT='$(PKGEXT)'
-	pwd
 	@echo
 	@echo Package done!
 	@echo You can install it as root with:

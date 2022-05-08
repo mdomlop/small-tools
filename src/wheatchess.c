@@ -10,13 +10,15 @@ The last value must be 18446744073709551615
 
 #include<stdio.h>
 
+#define EXECUTABLE "wheatchess"
+
 
 int main(void)
 {
     register int i = 0;
     unsigned long x = 1;
     unsigned long t = 1;
-    for (i; i < 64; i++)
+    for (; i < 64; i++)
     {
         printf("%d: %lu %lu\n", i + 1, x, t);
         x = x * 2;
