@@ -24,6 +24,7 @@ static int gcd (int a, int b)
 int main(int argc, char ** argv)
 {
 	float hsize, vsize, dsize;
+	int divisor;
 
 	char usage[] = "Usage:\n\n\t"
 		EXECUTABLE " hsize vsize\n\n"
@@ -49,9 +50,11 @@ int main(int argc, char ** argv)
 
 	dsize = pow(hsize, 2) + pow(vsize, 2);
 	dsize = sqrt(dsize) / INCH;  /* Paso a centímetros */
+	divisor = gcd(hsize, vsize);
 
 	printf("Diagonal: %.2f inch\n", dsize);
-	printf("Aspect ratio: %.2f \n", gcd(hsize, vsize));
+	printf("Aspect ratio: %.0f:%.0f (%.2f:1) \n",
+			hsize / divisor, vsize / divisor, hsize / vsize );
 
 	return 0;
 }

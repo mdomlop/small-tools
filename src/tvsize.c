@@ -59,10 +59,10 @@ int main(int argc, char ** argv)
 	vsize = dsize * vratio / pythagoras_ratio(hratio, vratio);
 	area = hsize * vsize;
 
-	printf("\nLas dimensiones de la pantalla son:\n"
-	"\n - Ancho: %.2f cm\n"
-	" - Alto: %.2f cm\n"
-	" - Área: %.2f cm2\n",
+	printf(
+	"Width: %.2f cm\n"
+	"Height: %.2f cm\n"
+	"Area: %.2f cm2\n",
 	hsize, vsize, area);
 
 	return 0;
