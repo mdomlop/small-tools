@@ -1,40 +1,36 @@
 
-ARCHI = $(shell uname -m)
-PKGEXT=pkg.tar.zst
+PKGEXT  = pkg.tar.zst
+ARCHI   = $(shell uname -m)
 ARCHPKG = $(PKGNAME)-$(VERSION)-1-$(ARCHI).$(PKGEXT)
 
 PKGBUILD:
-	echo '# Maintainer: $(AUTHOR) <$(MAIL)>' > $@
-	echo '_pkgver_year=2018' >> $@
-	echo '_pkgver_month=07' >> $@
-	echo '_pkgver_day=26' >> $@
+	echo '# Maintainer: Manuel Domínguez López <$(MAIL)>' > $@
+	echo '_pkgver_year=2023' >> $@
+	echo '_pkgver_month=12' >> $@
+	echo '_pkgver_day=09' >> $@
 	echo 'pkgname=$(PKGNAME)' >> $@
 	echo 'pkgver=$(VERSION)' >> $@
 	echo 'pkgrel=1' >> $@
 	echo 'pkgdesc="$(DESCRIPTION)"' >> $@
 	#echo 'arch=("any")' >> $@
-	echo 'arch=("$(ARCHI)")' >> $@
+	echo 'arch=("i686" "x86_64")' >> $@
+	#echo 'makedepends=("btrfs-progs")' >> $@
+	#echo 'changelog=ChangeLog' >> $@
 	echo 'url="$(URL)"' >> $@
 	echo 'source=()' >> $@
 	echo 'license=("$(LICENSE)")' >> $@
-
-	echo 'group=("tools")' >> $@
-	#echo 'changelog=ChangeLog' >> $@
+	#echo 'backup=(etc/sstab)' >> $@
 	echo 'build() {' >> $@
 	echo 'cd $$startdir' >> $@
-	echo 'make elf' >> $@
+	echo 'make' >> $@
 	echo '}' >> $@
 	echo 'package() {' >> $@
 	echo 'cd $$startdir' >> $@
-	echo 'make install DESTDIR=$$pkgdir' >> $@
+	echo 'make install DESTDIR=$$pkgdir' PREFIX=$(PREFIX) >> $@
 	echo '}' >> $@
 
 pkg_arch: $(ARCHPKG)
-$(ARCHPKG): PKGBUILD makefile README.md
-	sed -i "s|pkgname=.*|pkgname=$(PKGNAME)|" PKGBUILD
-	sed -i "s|pkgver=.*|pkgver=$(VERSION)|" PKGBUILD
-	sed -i "s|pkgdesc=.*|pkgdesc='$(DESCRIPTION)'|" PKGBUILD
-	sed -i "s|url=.*|url='$(URL)'|" PKGBUILD
+$(ARCHPKG): PKGBUILD makefile LICENSE README.md $(SOURCES) $(CONFS)
 	makepkg -df PKGDEST=./ BUILDDIR=./ PKGEXT='.$(PKGEXT)'
 	@echo
 	@echo Package done!
@@ -42,4 +38,9 @@ $(ARCHPKG): PKGBUILD makefile README.md
 	@echo pacman -U $@
 
 clean_arch:
-	rm -rf pkg PKGBUILD
+	rm -rf pkg
+	rm -rf src
+	rm -f PKGBUILD
+
+purge_arch: clean_arch
+	rm -f $(PKGNAME)-$(VERSION)-1-$(ARCHI).$(PKGEXT)

@@ -3,6 +3,8 @@ DARCHI = $(shell dpkg --print-architecture)
 DEBIANDIR = $(PKGNAME)-$(VERSION)_$(DARCHI)
 DEBIANPKG = $(DEBIANDIR).deb
 
+#DEBIANDEPS = libbtrfsutil1
+
 $(DEBIANDIR)/DEBIAN:
 	mkdir -p -m 0775 $@
 
@@ -19,11 +21,11 @@ $(DEBIANDIR)/DEBIAN/copyright: copyright $(DEBIANDIR)/DEBIAN
 	cat $< >> $@
 
 
-$(DEBIANDIR)/DEBIAN/control: INFO $(DEBIANDIR)/DEBIAN
+$(DEBIANDIR)/DEBIAN/control: $(DEBIANDIR)/DEBIAN
 	echo 'Package: $(PKGNAME)' > $@
 	echo 'Version: $(VERSION)' >> $@
-	echo 'Architecture: all' >> $@
-	echo 'Depends:' >> $@
+	echo 'Architecture: $(DARCHI)' >> $@
+	echo 'Depends: $(DEBIANDEPS)' >> $@
 	echo 'Description: $(DESCRIPTION)' >> $@
 	echo 'Section: main' >> $@
 	echo 'Priority: optional' >> $@
@@ -31,14 +33,21 @@ $(DEBIANDIR)/DEBIAN/control: INFO $(DEBIANDIR)/DEBIAN
 	echo 'Homepage: $(URL)' >> $@
 	echo 'Installed-Size: 1' >> $@
 
+#$(DEBIANDIR)/DEBIAN/conffiles: $(DEBIANDIR)/DEBIAN
+#	echo '/etc/sstab' > $@
+
 pkg_debian: $(DEBIANPKG)
 $(DEBIANPKG): $(DEBIANDIR)
 	cp README.md $(DEBIANDIR)/DEBIAN/README
 	dpkg-deb --build --root-owner-group $(DEBIANDIR)
 
-$(DEBIANDIR): makefile $(DEBIANDIR)/DEBIAN/control $(DEBIANDIR)/DEBIAN/copyright
+#$(DEBIANDIR): $(DEBIANDIR)/DEBIAN/control $(DEBIANDIR)/DEBIAN/copyright $(DEBIANDIR)/DEBIAN/conffiles
+$(DEBIANDIR): $(DEBIANDIR)/DEBIAN/control $(DEBIANDIR)/DEBIAN/copyright
 	make install DESTDIR=$(DEBIANDIR)
 	sed -i "s/Installed-Size:.*/Installed-Size:\ $$(du -ks $(DEBIANDIR) | cut -f1)/" $<
 
 clean_debian:
 	rm -rf control DEBIAN DEBIANTEMP $(DEBIANDIR)
+
+purge_debian:
+	rm -f $(DEBIANPKG)

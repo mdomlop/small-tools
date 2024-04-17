@@ -1,10 +1,10 @@
-HNAME=Tiny tools
-PKGNAME=tiny-tools
+NAME=Tiny tools
 DESCRIPTION=Tiny tools for terminal.
+PKGNAME=tiny-tools
 VERSION=0.1
 AUTHOR=Manuel Domínguez López
 MAIL=zqbzybc@tznvy.pbz
-SOURCE=https://github.com/mdomlop/tiny-tools
 URL=https://github.com/mdomlop/tiny-tools
+SOURCE=https://github.com/mdomlop/tiny-tools
 LICENSE=GPL-3
 YEAR=2022
