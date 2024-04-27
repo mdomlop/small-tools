@@ -1,4 +1,4 @@
-SOURCES = source/ackermann.c source/bytes.c source/collatz.c source/eeinstein.c source/hrzones.c source/limit.c source/rule3.c source/tvinch.c source/tvsize.c source/wheatchess.c
+SOURCES = source/ackermann.c source/bytes.c source/collatz.c source/eeinstein.c source/hrzones.c source/limit.c source/rule3.c source/tvinch.c source/tvsize.c source/wheatchess.c source/runcalc.c
 
 INFO = INFO
 
