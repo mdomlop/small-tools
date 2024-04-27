@@ -1,7 +1,7 @@
 NAME=Tiny tools
 DESCRIPTION=Tiny tools for terminal.
 PKGNAME=tiny-tools
-VERSION=0.1
+VERSION=0.2
 AUTHOR=Manuel Domínguez López
 MAIL=zqbzybc@tznvy.pbz
 URL=https://github.com/mdomlop/tiny-tools
