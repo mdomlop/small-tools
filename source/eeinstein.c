@@ -16,6 +16,7 @@ Nota: Si la masa se da en gramos, la fórmula produce la energía en ergios.
 */
 
 #include <stdio.h>
+#include <stdlib.h> // C99 strtold()
 
 #define EXECUTABLE  "einstein-e"
 
@@ -27,14 +28,19 @@ Nota: Si la masa se da en gramos, la fórmula produce la energía en ergios.
 #define TSAR 50 /* Megatones */
 
 
-int main (void)
+int main (int argc, char ** argv)
 {
     long double e, m;
     const long double c2 = 343886617528564510758027657216.0; /* El resultado de
     calcular (2.997925 * 10^10)^2 */
 
-    printf("Introduzca la masa en gramos: ");
-    scanf("%Lf", &m);
+    if (argc == 1)
+    {
+        printf("Introduzca la masa en gramos: ");
+        scanf("%Lf", &m);
+    }
+    else
+            m = strtold(argv[1], NULL);
 
     e = m * c2;
 
